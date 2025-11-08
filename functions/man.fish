@@ -1,25 +1,8 @@
 function man --wraps man --description 'Format and display manual pages'
-    function _man_colorize -a var
-        set -l caps $argv[2..]
-
-        if set -q $var
-            echo (set_color $var)
-            return
-        end
-
-        echo -n (tput setaf $caps[1])
-
-        for cap in $caps[2..]
-            echo -n (tput $cap)
-        end
-
-        echo
-    end
-
-    set -l blink (_man_colorize man_blink 1 bold) # COLOR_RED
-    set -l bold (_man_colorize man_bold 6 bold) # COLOR_CYAN
-    set -l standout (_man_colorize man_standout 7) # COLOR_WHITE
-    set -l underline (_man_colorize man_underline 5 smul) # COLOR_MAGENTA
+    set -q man_blink; and set -l blink (set_color $man_blink); or set -l blink (tput setaf 1; tput bold) # COLOR_RED
+    set -q man_bold; and set -l bold (set_color $man_bold); or set -l bold (tput setaf 6; tput bold) # COLOR_CYAN
+    set -q man_standout; and set -l standout (set_color $man_standout); or set -l standout (tput setaf 7) # COLOR_WHITE
+    set -q man_underline; and set -l underline (set_color $man_underline); or set -l underline (tput setaf 5; tput smul) # COLOR_MAGENTA
 
     set -l end (printf "\e[0m")
 
