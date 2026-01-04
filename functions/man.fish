@@ -1,7 +1,7 @@
 function man --wraps man --description 'Format and display manual pages'
     set -q man_blink; and set -l blink (set_color $man_blink); or set -l blink (tput setaf 1; tput bold) # COLOR_RED
     set -q man_bold; and set -l bold (set_color $man_bold); or set -l bold (tput setaf 6; tput bold) # COLOR_CYAN
-    set -q man_standout; and set -l standout (set_color $man_standout); or set -l standout (tput setaf 7) # COLOR_WHITE
+    set -q man_standout; and set -l standout (set_color $man_standout); or set -l standout (tput setab 5; tput setaf 0) # COLOR_BLACK on COLOR_MAGENTA
     set -q man_underline; and set -l underline (set_color $man_underline); or set -l underline (tput setaf 5; tput smul) # COLOR_MAGENTA
 
     set -l end (printf "\e[0m")
